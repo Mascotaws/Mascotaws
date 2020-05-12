@@ -1,0 +1,69 @@
+AWSTemplateFormatVersion : '2010-09-09'
+Transform:
+  - AWS::Serverless-2016-10-31
+  
+Parameters:
+  Project: 
+    Type: String
+
+Description: my template
+Resources:
+  MyLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: rpp-ip-cluster-lambda-role
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - lambda.amazonaws.com
+          Action:
+          - sts:AssumeRole
+      Path: "/"
+      Policies:
+      - PolicyName: my-lambda-policy
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Action:
+            - logs:CreateLogGroup
+            - logs:CreateLogStream
+            - logs:PutLogEvents
+            Resource: arn:aws:logs:*:*:*
+  
+  MyAPI:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: my-api-gateway
+      StageName: prod
+      DefinitionBody:
+        Fn::Transform:
+          Name: AWS::Include
+          Parameters:
+            Location: swagger.yaml
+  
+  MyLambda1:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: my-lambda-1
+      Runtime: python3.6
+      CodeUri: ./build
+      Handler: lambda1.handler
+      Timeout: 30
+      MemorySize: 500
+      Role: !GetAtt MyLambdaRole.Arn
+      Events:
+        GetUsers:
+          Type: Api
+          Properties:
+            RestApiId: !Ref MyAPI
+            Path: /users
+            Method: GET
+  
+
+Outputs: 
+  RoleARN:
+    Value: !GetAtt MyLambdaRole.Arn 
