@@ -1,0 +1,18 @@
+openapi: 3.0.0
+
+x-amazon-apigateway-request-validators:
+  basic:
+    validateRequestBody: false
+    validateRequestParameters: true
+
+x-amazon-apigateway-request-validator: basic
+paths:
+  /users:
+    get:
+      
+      x-amazon-apigateway-integration:
+        type: "aws_proxy"
+        uri:
+          Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:my-lambda-1/invocations"
+        httpMethod: "POST"
+        
