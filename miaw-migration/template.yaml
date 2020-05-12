@@ -10,3 +10,5 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: miaw-migration-lectura-excel-imagenes-1
+      
+ 
