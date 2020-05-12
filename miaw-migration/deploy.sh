@@ -13,7 +13,7 @@ fi
 i=0 p=0 b=0 d=0
 
 CF_FILE="/tmp/cf_file.txt"
-DEPLOYMENTS_BUCKET="cualquier-bucket-123-mascotaws"
+DEPLOYMENTS_BUCKET="cloud-formation-upb-cloud9-shell-template"
 
 case "$1" in
   -i|--install)

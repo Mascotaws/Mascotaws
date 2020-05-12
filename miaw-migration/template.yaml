@@ -5,7 +5,6 @@ Transform:
 
 Description: miaw bucked excel images
 Resources:
-  
   MyLambdaRole:
     Type: AWS::IAM::Role
     Properties:
@@ -52,25 +51,27 @@ Resources:
             - dynamodb:Update*
             - dynamodb:PutItem
             Resource: arn:aws:dynamodb:*:*:table/*
-            
-  MyLambdaMiawMigration:
-    Type: AWS::Serverless::Function
-    Properties:
-       FunctionName: lambda-migration
-       Runtime: python3.6
-       CodeUri: ./build
-       Handler: lambda-migration.lambda_handler
-       Role: !GetAtt MyLambdaRole.Arn
-       Events:
-        S3Event:
-          Type: S3
-          Properties:
-            Bucket: miaw-migration-lectura-excel-imagenes-1
-            Events: s3:ObjectCreated:*
-       
   MyBucket:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: miaw-migration-lectura-excel-imagenes-1
+            
+  MyLambdaMiawMigration:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: lambdaMigration
+      Runtime: python3.6
+      CodeUri: ./build
+      Handler: lambdaMigration.lambda_handler
+      Role: !GetAtt MyLambdaRole.Arn
+      Events:
+        S3Event:
+          Type: S3
+          Properties:
+            Bucket: !GetAtt MyBucket.Arn
+            Events: s3:ObjectCreated:*
+            
+       
+  
       
  
