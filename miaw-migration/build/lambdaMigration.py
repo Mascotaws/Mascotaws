@@ -14,7 +14,7 @@ def lambda_handler(event, context):
         if keylave.find(".csv"):
             object_file = s3_client.get_object(Bucket=bucket, Key=keylave)
             initial_df = pd.read_csv(object_file['Body'], skiprows=[1,2,3])
-            print(initial_df['health'])
+            print(initial_df['IMG_ORIGINAL'])
         else:
             copy_source = { 
                 'Bucket': bucket, 
@@ -24,8 +24,3 @@ def lambda_handler(event, context):
             tpkey=archi+keylave
             s3_client.copy_object(Bucket='upb-convert-image-lambda-lab-level1',CopySource=copy_source, Key=tpkey)
             print(bucket,keylave)
-        
-        
-        
-        
-        
