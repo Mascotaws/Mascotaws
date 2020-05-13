@@ -1,12 +1,9 @@
-AWSTemplateFormatVersion : '2010-09-09'
+AWSTemplateFormatVersion: '2010-09-09'
+
 Transform:
   - AWS::Serverless-2016-10-31
 
-Parameters:
-  Project: 
-    Type: String
-
-Description: lambda and bucket
+Description: F
 Resources:
   MyBucket:
     Type: AWS::S3::Bucket
@@ -14,7 +11,7 @@ Resources:
       AccessControl: PublicRead
       BucketName: convert-image544934777
     DeletionPolicy: Retain
-        
+    
   BucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
@@ -26,9 +23,9 @@ Resources:
             Effect: Allow
             Principal: '*'
             Action: s3.GetObject
-            Resource: arn:aws:s3:::MyBucket
+            Resource: arn:aws:s3:::convert-image544934777
       Bucket: !Ref MyBucket
-      
+  
   MyLambdaRole1:
     Type: AWS::IAM::Role
     DeletionPolicy: Retain
@@ -74,4 +71,4 @@ Resources:
               S3Key:
                 Rules:
                 - Name: prefix
-                 
+                  Value: .png
