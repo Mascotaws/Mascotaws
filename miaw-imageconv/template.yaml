@@ -8,28 +8,27 @@ Parameters:
 
 Description: lambda and bucket
 Resources:
-  MyBucketRole:
-    Type: AWS::S3::BucketPolicy
-    DeletionPolicy: Retain
-    Properties:
-      Bucket: convert-image44934777
-      PolicyDocument:
-        Statement:
-        - Action: s3.GetObject
-          Effect: Allow
-          
   MyBucket:
     Type: AWS::S3::Bucket
-    DeletionPolicy: Retain
     Properties:
       AccessControl: PublicRead
-      BucketName: convert-image44934777
-      ReplicationConfiguration:
-        Role: MyBucketRole
-
-  
-  
-  
+      BucketName: convert-image544934777
+    DeletionPolicy: Retain
+        
+  BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      PolicyDocument:
+        Id: MyPolicy
+        Version: 2012-10-17
+        Statement:
+          - Sid: PublicReadForGetBucketObjects
+            Effect: Allow
+            Principal: '*'
+            Action: s3.GetObject
+            Resource: arn:aws:s3:::MyBucket
+      Bucket: !Ref MyBucket
+      
   MyLambdaRole1:
     Type: AWS::IAM::Role
     DeletionPolicy: Retain
@@ -52,7 +51,7 @@ Resources:
           Statement:
           - Effect: Allow
             Action: s3:*
-            Resource: arn:aws:s3:::convert-image
+            Resource: arn:aws:s3:::convert-image544934777
 
   ConvertImageLambda:
     Type: AWS::Serverless::Function
