@@ -37,10 +37,14 @@ Resources:
             Resource: arn:aws:logs:*:*:*
           - Effect: Allow
             Action:
+            - dynamodb:BatchGetItem
+            - dynamodb:GetItem
+            - dynamodb:Query
+            - dynamodb:Scan
             - dynamodb:BatchWriteItem
             - dynamodb:PutItem
             - dynamodb:UpdateItem
-            Resource: arn:aws:dynamodb:*:*:*
+            Resource: arn:aws:dynamodb:*:*:table/ElecClean
   
   MyAPI:
     Type: AWS::Serverless::Api
@@ -68,10 +72,9 @@ Resources:
           Type: Api
           Properties:
             RestApiId: !Ref MyAPI
-            Path: /users
+            Path: /pets
             Method: GET
   
-
 Outputs: 
   RoleARN:
     Value: !GetAtt MyLambdaRole.Arn 

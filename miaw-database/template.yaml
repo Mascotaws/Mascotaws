@@ -1,0 +1,30 @@
+Type: AWS::DynamoDB::Table
+Properties: 
+  TableName: animal_adoption
+  AttributeDefinitions: 
+    - AttributeName: PK
+      AttributeType: S
+    - AttributeName: SK
+      AttributeType: S
+    - AttributeName: PET_TYPE
+      AttributeType: S
+    - AttributeName: HEALTH
+      AttributeType: S
+    - AttributeName: AGE
+      AttributeType: N
+    - AttributeName: LOCATION
+      AttributeType: S
+    - AttributeName: IMG_ORIGINAL
+      AttributeType: S
+    - AttributeName: IMG_NORMAL
+      AttributeType: S
+    - AttributeName: IMG_THUMB
+      AttributeType: S
+  KeySchema: 
+    - AttributeName: PK
+      KeyType: String
+  ProvisionedThroughput: 
+    ReadCapacityUnits: 5
+    WriteCapacityUnits: 5
+    
+    
