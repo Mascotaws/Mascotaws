@@ -1,4 +1,3 @@
-  
 #!/bin/bash
 
 OPTIONS=ibdr
@@ -13,7 +12,7 @@ fi
 i=0 p=0 b=0 d=0
 
 CF_FILE="/tmp/cf_file.txt"
-DEPLOYMENTS_BUCKET="cualquier-bucket-123-mascotaws"
+DEPLOYMENTS_BUCKET="cloudfront-bucket-upb"
 
 case "$1" in
   -i|--install)
@@ -46,12 +45,11 @@ if [[ $i -eq 1 ]]; then
 fi
 
 if [[ $b -eq 1 ]]; then
-  
+
 aws cloudformation package \
   --template-file template.yaml \
   --s3-bucket $DEPLOYMENTS_BUCKET \
   --output-template-file $CF_FILE
-
 fi
 
 if [[ $d -eq 1 ]]; then
@@ -59,11 +57,11 @@ if [[ $d -eq 1 ]]; then
 aws cloudformation deploy \
   --no-fail-on-empty-changeset \
   --template-file $CF_FILE \
-  --parameter-overrides Project=cf_lab2  \
-  --stack-name "miaw-stack-bucket-excel" \
+  --parameter-overrides Project=cf_lab3  \
+  --stack-name "my-awesome-stack2" \
   --capabilities CAPABILITY_NAMED_IAM
 fi
 
 if [[ $r -eq 1 ]]; then
-    echo remove
+  echo remove
 fi
