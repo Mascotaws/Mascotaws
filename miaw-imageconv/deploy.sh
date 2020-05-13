@@ -67,10 +67,3 @@ aws cloudformation deploy \
 --capabilities CAPABILITY_NAMED_IAM
 aws lambda update-function-code --function-name convert-image-lambda --zip-file fileb://function1.zip
 fi
-
-if [[ $r -eq 1 ]]; then
-    echo remove
-
-
-
-fi
