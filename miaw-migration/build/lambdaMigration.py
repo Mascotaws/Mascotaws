@@ -13,10 +13,8 @@ def lambda_handler(event, context):
         keylave = unquote_plus(record['s3']['object']['key'])
         if keylave.find(".csv"):
             object_file = s3_client.get_object(Bucket=bucket, Key=keylave)
-            initial_df = pd.read_csv(object_file['Body'])
-            for label, content in initial_df.items():
-                print('label:', label)
-                print('content:', content, sep='\n')
+            initial_df = pd.read_csv(object_file['Body'], skiprows=[1,2,3])
+            print(initial_df['health'])
         else:
             copy_source = { 
                 'Bucket': bucket, 
