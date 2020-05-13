@@ -51,13 +51,8 @@ Resources:
             - logs:PutLogEvents
             Resource: arn:aws:logs:*:*:*
           - Effect: Allow
-            Action: 
-            - s3:PutObject
-            - s3:PutObjectAcl
-            - s3:GetObject
-            - s3:GetObjectAcl
-            - s3:DeleteObject
-            Resource: arn:aws:s3:::convert-image5449347775/*
+            Action: s3:*
+            Resource: arn:aws:s3:::*/*
 
   ConvertImageLambda:
     Type: AWS::Serverless::Function
@@ -80,4 +75,4 @@ Resources:
               S3Key:
                 Rules:
                 - Name: prefix
-                  Value: .png
+                  Value: media/
