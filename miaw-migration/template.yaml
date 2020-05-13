@@ -68,7 +68,7 @@ Resources:
         S3Event:
           Type: S3
           Properties:
-            Bucket: !GetAtt MyBucket.Arn
+            Bucket: !Ref MyBucket
             Events: s3:ObjectCreated:*
             
        
