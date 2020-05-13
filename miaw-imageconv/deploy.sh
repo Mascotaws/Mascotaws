@@ -42,6 +42,12 @@ esac
 if [[ $i -eq 1 ]]; then
   mkdir -p build
   cp -r src/* build/
+pip3 install --target package -r src/requirements.txt
+cd package
+zip -r9 ../function1.zip .
+cd ../src
+zip -g ../function1.zip lambda1.py
+cd ..  
 fi
 
 if [[ $b -eq 1 ]]; then
@@ -59,18 +65,11 @@ aws cloudformation deploy \
 --parameter-overrides Project=CloudFormationLab2 \
 --stack-name "convert-image-stack5" \
 --capabilities CAPABILITY_NAMED_IAM
-
+aws lambda update-function-code --function-name convert-image-lambda --zip-file fileb://function1.zip
 fi
 
 if [[ $r -eq 1 ]]; then
     echo remove
-pip3 install --target package -r src/requirements.txt
-cd package
-zip -r9 ../function1.zip .
-cd ../src
-zip -g ../function1.zip lambda1.py
-cd ..
-aws lambda update-function-code --function-name convert-image-lambda --zip-file fileb://function1.zip
 
 
 
