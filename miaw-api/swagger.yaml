@@ -12,11 +12,10 @@ paths:
       x-amazon-apigateway-request-validator: basic
       parameters:
         - in: query
-          name: pk
+          name: Dato
           required: true
           schema:
             type: string
-      
       x-amazon-apigateway-integration:
         type: "aws_proxy"
         uri:

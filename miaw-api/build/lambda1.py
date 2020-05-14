@@ -1,14 +1,14 @@
 import json
 import boto3
-from boto3.dynamodb.conditions import Key, Attr
+from boto3.dynamodb.conditions import Key
 
 def lambda_handler(event, context):
     dynamodb = boto3.resource('dynamodb')
-    #Nombre de la tabala
-    datos= dynamodb.Table('pets')
-    # datos obtenidos de la tabla
-    items = datos.scan()
-    return {
-        'statusCode': 200,
-        'body': items
-    }
+    table= dynamodb.Table('pets')
+    data=event['queryStringParameters']['Dato']
+    response = table.query(
+        KeyConditionExpression=Key('pk').eq(data)
+    )
+    items = response['Items']
+    for item in items:
+        print(item)

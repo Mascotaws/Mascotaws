@@ -11,7 +11,7 @@ Resources:
   MyLambdaRole:
     Type: AWS::IAM::Role
     Properties:
-      RoleName: cluster-lambda-role
+      RoleName: lambdarol-common
       ManagedPolicyArns: 
         - 'arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess'
       AssumeRolePolicyDocument:
@@ -44,7 +44,7 @@ Resources:
             - dynamodb:BatchWriteItem
             - dynamodb:PutItem
             - dynamodb:UpdateItem
-            Resource: arn:aws:dynamodb:*:*:table/ElecClean
+            Resource: arn:aws:dynamodb:*:*:table/pets
   
   MyAPI:
     Type: AWS::Serverless::Api
