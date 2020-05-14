@@ -8,7 +8,7 @@ import os
 
 s3_client = boto3.client('s3')
 dynamodb = boto3.resource('dynamodb')
-mascotatable = dynamodb.Table('animal_adoption')
+mascotatable = dynamodb.Table('animal-adoption')
 
 
 def lambda_handler(event, context):

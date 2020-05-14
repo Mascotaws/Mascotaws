@@ -5,10 +5,10 @@ import pandas as pd
 import json
 import os
 
-
+ConvertImageBucket='upb-convert-image-lambda-lab-level1'
 s3_client = boto3.client('s3')
 dynamodb = boto3.resource('dynamodb')
-mascotatable = dynamodb.Table('animal_adoption')
+mascotatable = dynamodb.Table('animal-adoption')
 
 
 def lambda_handler(event, context):
@@ -66,5 +66,5 @@ def lambda_handler(event, context):
             } 
             archi='media/'
             tpkey=archi+keylave
-            s3_client.copy_object(Bucket='upb-convert-image-lambda-lab-level1',CopySource=copy_source, Key=tpkey)
+            s3_client.copy_object(Bucket=ConvertImageBucket,CopySource=copy_source, Key=tpkey)
             print(bucket,keylave)
