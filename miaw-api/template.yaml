@@ -47,7 +47,7 @@ Resources:
             - dynamodb:BatchWriteItem
             - dynamodb:PutItem
             - dynamodb:UpdateItem
-            Resource: arn:aws:dynamodb:*:*:table/pets
+            Resource: arn:aws:dynamodb:*:*:table/animal-adoption
   
   MyAPI:
     Type: AWS::Serverless::Api
