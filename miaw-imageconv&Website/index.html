@@ -33,20 +33,15 @@
   </div>
     
   <script>
-    var info = JSON.parse('{"Items": [{"sk":"John", "pk":"John", "name":"John", "age": "2", "location": "La Paz", "image": "normal/perro.jpg", "status": "good"}, {"sk":"John", "pk":"John", "name":"John", "age": "2", "location": "La Paz", "image": "normal/perro.jpg", "status": "good"}, {"sk":"John", "pk":"John", "name":"John", "age": "2", "location": "La Paz", "image": "normal/perro.jpg", "status": "good"}]}');
-    /*$.ajax({
-      type: "POST",
-      url: "",
-      crossDomain: true,
-      data: myData,
-      contentType: "application/json",
-      dataType: "json",
-      success: function(data, status) {
-        alert(data);
-      }
-    });*/
+    var j = '{"Items": [{"sk":"John", "pk":"John", "name":"John", "age": "2", "location": "La Paz", "image": "normal/perro.jpg", "status": "good"}, {"sk":"John", "pk":"John", "name":"John", "age": "2", "location": "La Paz", "image": "normal/perro.jpg", "status": "good"}, {"sk":"John", "pk":"John", "name":"John", "age": "2", "location": "La Paz", "image": "normal/perro.jpg", "status": "good"}]}';
+    var info = JSON.parse(j);
+    $.getJSON('http://time.jsontest.com', function(data) {
+        info = JSON.parse(j);
+    });
     $(document).ready(function() {
       $.each(info.Items, function(i, item) {
+        var link = 
+        "pet.html?" + "id=" + info.Items[i].pk;
         $("ol").append(
           "<div class='box'>" + 
             "<div class='card' style='width: 18rem;'>" + 
@@ -56,7 +51,7 @@
                 "<h5 class='card-title'>" + info.Items[i].age + "</h5>" + 
                 "<h5 class='card-title'>" + info.Items[i].status + "</h5>" + 
                 "<h5 class='card-title'>" + info.Items[i].location + "</h5>" + 
-                "<a href='#' class='btn btn-primary'>Ir a mMascota</a>" + 
+                "<a href='" + link + "' class='btn btn-primary'>Ir a Mascota</a>" + 
               "</div>" + 
             "</div>" + 
           "</div>"
