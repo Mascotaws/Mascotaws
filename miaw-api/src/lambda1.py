@@ -10,7 +10,7 @@ def decimal_default(obj):
     raise TypeError
 
 dynamodb = boto3.resource('dynamodb')
-datos= dynamodb.Table('pets')
+datos= dynamodb.Table('animal-adoption')
 
 def handler(event, context):
     try:
