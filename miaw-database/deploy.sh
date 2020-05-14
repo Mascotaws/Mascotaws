@@ -59,7 +59,7 @@ aws cloudformation deploy \
   --no-fail-on-empty-changeset \
   --template-file $CF_FILE \
   --parameter-overrides Project=mascotaws\
-  --stack-name "aaws-new-stack" \
+  --stack-name "aaws-newer-stack" \
   --capabilities CAPABILITY_NAMED_IAM
 fi
 

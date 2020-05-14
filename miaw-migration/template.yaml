@@ -54,7 +54,7 @@ Resources:
   MyBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: miaw-migration-lectura-excel-imagenes-1
+      BucketName: miaw-migration-lectura-excel-imagenes-1-new
             
   MyLambdaMiawMigration:
     Type: AWS::Serverless::Function
