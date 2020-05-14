@@ -33,28 +33,27 @@
   </div>
     
   <script>
-    var info = JSON.parse(j);
-    $.getJSON('https://9w2ykwf3ua.execute-api.us-east-2.amazonaws.com/prod/pets', function(data) {
-        info = JSON.parse(data);
-    });
     $(document).ready(function() {
-      $.each(info.Items, function(i, item) {
-        var link = 
-        "pet.html?" + "img=" + info.Items[i].IMGNORMAL;
-        $("ol").append(
-          "<div class='box'>" + 
-            "<div class='card' style='width: 18rem;'>" + 
-            "<img class='image' src='" + info.Items[i].IMGTHUMB + "' alt='Card image cap'>" + 
-              "<div class='card-body'>" + 
-                "<h5 class='card-title'>" + info.Items[i].PK + "</h5>" + 
-                "<h5 class='card-title'>" + info.Items[i].AGE + "</h5>" + 
-                "<h5 class='card-title'>" + info.Items[i].HEALTH + "</h5>" + 
-                "<h5 class='card-title'>" + info.Items[i].LOCATION + "</h5>" + 
-                "<a href='" + link + "' class='btn btn-primary'>Ir a Mascota</a>" + 
+      $.getJSON('https://9w2ykwf3ua.execute-api.us-east-2.amazonaws.com/prod/pets', function(data) {
+        var info = JSON.parse(data);
+        $("ol").append("sss");
+        $.each(info, function(i, item) {
+          var link = "pet.html?" + "img=" + info[i].IMGNORMAL;
+          $("ol").append(
+            "<div class='box'>" + 
+              "<div class='card' style='width: 18rem;'>" + 
+              "<img class='image' src='" + info[i].IMGTHUMB + "' alt='Card image cap'>" + 
+                "<div class='card-body'>" + 
+                  "<h5 class='card-title'>" + info[i].PK + "</h5>" + 
+                  "<h5 class='card-title'>" + info[i].AGE + "</h5>" + 
+                  "<h5 class='card-title'>" + info[i].HEALTH + "</h5>" + 
+                  "<h5 class='card-title'>" + info[i].LOCATION + "</h5>" + 
+                  "<a href='" + link + "' class='btn btn-primary'>Ir a Mascota</a>" + 
+                "</div>" + 
               "</div>" + 
-            "</div>" + 
-          "</div>"
-        );
+            "</div>"
+          );
+        });
       });
     });
   </script>
