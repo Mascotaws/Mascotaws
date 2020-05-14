@@ -16,14 +16,19 @@ def lambda_handler(event, context):
         if keylave.count(".csv")==1:
             object_file = s3_client.get_object(Bucket=bucket, Key=keylave)
             df=pd.read_csv(object_file['Body'])
-            s3_client.put_object(Bucket=bucket, Key='datos.json')
-            object_json = s3_client.get_object(Bucket=bucket, Key='datos.json')
-            df.to_json(object_json['Body'])
-            with open(object_json['Body'], 'r') as f:
+            df.to_json(r'/tmp/file.json')
+            with open('/tmp/file.json', 'r') as f:
                 data = json.load(f)
-                print(data)
             final_list = [{} for _ in next(iter(data.values()))]
-            
+            for att in data:
+                count = 0
+                for element in data[att]:
+                    final_list[count][att] = data[att][element]
+                    count+=1
+            for song in final_list:
+                for attribute, value in song.items():
+                    print(attribute, value)
+            print(final_list)
         else:
             copy_source = { 
                 'Bucket': bucket, 
