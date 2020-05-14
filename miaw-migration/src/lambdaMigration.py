@@ -29,27 +29,32 @@ def lambda_handler(event, context):
                     count+=1
             jsonlist=[]
             for song in final_list:
+                print(song['SK'].count("img"))
                 if song['SK'].count("img")==1:
+                    imgo=str("media/"+song['IMG_ORIGINAL'])
+                    imgm=str("normal/"+song['IMG_ORIGINAL'])
+                    imgt=str("thumbnails/"+song['IMG_ORIGINAL'])
+                    parte2= {
+                        "PK":song['PK'],
+                        "SK":song['SK'],
+                        "IMGORIGINAL":imgo,
+                        "IMGNORMAL":imgm,
+                        "IMGTHUMB":imgt
+                    }
+                    jsonlist.append(parte2)
+                else:
                     parte1= {
                         "PK":song['PK'],
                         "SK":song['SK'],
                         "PET_TYPE":song['PET_TYPE'],
                         "HEALTH":song['HEALTH'],
-                        "AGE":song['AGE'],
-                        "LOCATION":song['LOCATION'],
-                    }
-                    jsonlist.append(parte1)
-                else:
-                    parte2= {
-                        "PK":song['PK'],
-                        "SK":song['SK'],
-                        "IMGORIGINAL":"media/"+song['IMG_ORIGINAL'],
-                        "IMGNORMAL":"normal/"+song['IMG_ORIGINAL'],
-                        "IMGTHUMB":"thumbnails/"+song['IMG_ORIGINAL'],
+                        "AGE":int(song['AGE']),
+                        "LOCATION":song['LOCATION']
                     }
                     jsonlist.append(parte1)
             with mascotatable.batch_writer() as batch:
                 for student in jsonlist:
+                    print(student,type(student))
                     batch.put_item(
                         Item=student
                     )
