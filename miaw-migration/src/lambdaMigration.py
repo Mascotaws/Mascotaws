@@ -5,7 +5,7 @@ import pandas as pd
 import json
 import os
 
-ConvertImageBucket='upb-convert-image-lambda-lab-level1'
+ConvertImageBucket='convert-image544934777-new'
 s3_client = boto3.client('s3')
 dynamodb = boto3.resource('dynamodb')
 mascotatable = dynamodb.Table('animal-adoption')
