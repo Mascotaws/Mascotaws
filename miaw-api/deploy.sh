@@ -57,8 +57,8 @@ if [[ $d -eq 1 ]]; then
 aws cloudformation deploy \
   --no-fail-on-empty-changeset \
   --template-file $CF_FILE \
-  --parameter-overrides Project=cf_lab3  \
-  --stack-name "my-awesome-stack2" \
+  --parameter-overrides Project=Data-Mascotaws  \
+  --stack-name "my-mascotaws-database" \
   --capabilities CAPABILITY_NAMED_IAM
 fi
 

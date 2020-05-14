@@ -7,12 +7,18 @@ x-amazon-apigateway-request-validators:
 
 x-amazon-apigateway-request-validator: basic
 paths:
-  /users:
+  /pets:
     get:
-      
+      x-amazon-apigateway-request-validator: basic
+      parameters:
+        - in: query
+          name: Dato
+          required: true
+          schema:
+            type: string
       x-amazon-apigateway-integration:
         type: "aws_proxy"
         uri:
-          Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:my-lambda-1/invocations"
-        httpMethod: "POST"
+          Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:GetData/invocations"
+        httpMethod: "GET"
         
