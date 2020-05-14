@@ -10,6 +10,11 @@ def resize_image(image_path, resized_path):
     with Image.open(image_path) as image:
         image.thumbnail(tuple(x / 2 for x in image.size))
         image.save(resized_path)
+        
+def resize2(image_path,resized_path):
+    with Image.open(image_path) as image:
+        image.resize((500, 500))
+        image.save(resized_path)
     
 def lambda_handler(event, context):
     for record in event['Records']:
@@ -22,3 +27,6 @@ def lambda_handler(event, context):
         resize_image(download_path, upload_path)
         key = key.split('/')[-1]
         lkb = s3_client.upload_file(upload_path, bucket, 'thumbnails/{}'.format(key))
+        resize2(download_path,upload_path)
+        key2 = key.split('/')[0]
+        lkb2 = s3_client.upload_file(upload_path, bucket, 'normal/{}'.format(key))

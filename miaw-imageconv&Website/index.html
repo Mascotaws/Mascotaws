@@ -5,8 +5,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="http://code.jquery.com/jquery.min.js"></script>
 </head>
 <style>
   .box {
@@ -31,24 +33,34 @@
   </div>
     
   <script>
-      $(document).ready(function() {
-        $("ol").append();
+    var info = JSON.parse(j);
+    $.getJSON('https://9w2ykwf3ua.execute-api.us-east-2.amazonaws.com/prod/pets', function(data) {
+        info = JSON.parse(data);
+    });
+    $(document).ready(function() {
+      $.each(info.Items, function(i, item) {
+        var link = 
+        "pet.html?" + "img=" + info.Items[i].IMGNORMAL;
+        $("ol").append(
+          "<div class='box'>" + 
+            "<div class='card' style='width: 18rem;'>" + 
+            "<img class='image' src='" + info.Items[i].IMGTHUMB + "' alt='Card image cap'>" + 
+              "<div class='card-body'>" + 
+                "<h5 class='card-title'>" + info.Items[i].PK + "</h5>" + 
+                "<h5 class='card-title'>" + info.Items[i].AGE + "</h5>" + 
+                "<h5 class='card-title'>" + info.Items[i].HEALTH + "</h5>" + 
+                "<h5 class='card-title'>" + info.Items[i].LOCATION + "</h5>" + 
+                "<a href='" + link + "' class='btn btn-primary'>Ir a Mascota</a>" + 
+              "</div>" + 
+            "</div>" + 
+          "</div>"
+        );
       });
+    });
   </script>
 
   <ol>
-    <div class="box">
-      <div class="card" style="width: 18rem;">
-        <img class="image" src="normal/perro.jpg" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Nombre: </h5>
-          <h5 class="card-title">Edad: </h5>
-          <h5 class="card-title">Status: </h5>
-          <h5 class="card-title">Location: </h5>
-          <a href="#" class="btn btn-primary">Ir a Mascota</a>
-        </div>
-      </div>
-  </div>
+    
   </ol>
 
 </body>

@@ -41,7 +41,7 @@ esac
 
 if [[ $i -eq 1 ]]; then
   mkdir -p build
-  cp -r src/* build/
+  #cp -r src/* build/
 fi
 
 if [[ $b -eq 1 ]]; then
@@ -58,8 +58,8 @@ if [[ $d -eq 1 ]]; then
 aws cloudformation deploy \
   --no-fail-on-empty-changeset \
   --template-file $CF_FILE \
-  --parameter-overrides Project=miaw-database  \
-  --stack-name "aaws-stack" \
+  --parameter-overrides Project=mascotaws\
+  --stack-name "aaws-newer-stack" \
   --capabilities CAPABILITY_NAMED_IAM
 fi
 
