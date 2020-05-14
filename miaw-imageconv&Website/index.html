@@ -34,8 +34,8 @@
     
   <script>
     var info = JSON.parse(j);
-    $.getJSON('https://gajx6w7593.execute-api.us-east-2.amazonaws.com/prod/pets', function(data) {
-        info = JSON.parse(j);
+    $.getJSON('https://9w2ykwf3ua.execute-api.us-east-2.amazonaws.com/prod/pets', function(data) {
+        info = JSON.parse(data);
     });
     $(document).ready(function() {
       $.each(info.Items, function(i, item) {
@@ -44,12 +44,12 @@
         $("ol").append(
           "<div class='box'>" + 
             "<div class='card' style='width: 18rem;'>" + 
-            "<img class='image' src='" + info.Items[i].image + "' alt='Card image cap'>" + 
+            "<img class='image' src='" + info.Items[i].IMGTHUMB + "' alt='Card image cap'>" + 
               "<div class='card-body'>" + 
-                "<h5 class='card-title'>" + info.Items[i].name + "</h5>" + 
-                "<h5 class='card-title'>" + info.Items[i].age + "</h5>" + 
-                "<h5 class='card-title'>" + info.Items[i].status + "</h5>" + 
-                "<h5 class='card-title'>" + info.Items[i].location + "</h5>" + 
+                "<h5 class='card-title'>" + info.Items[i].PK + "</h5>" + 
+                "<h5 class='card-title'>" + info.Items[i].AGE + "</h5>" + 
+                "<h5 class='card-title'>" + info.Items[i].HEALTH + "</h5>" + 
+                "<h5 class='card-title'>" + info.Items[i].LOCATION + "</h5>" + 
                 "<a href='" + link + "' class='btn btn-primary'>Ir a Mascota</a>" + 
               "</div>" + 
             "</div>" + 

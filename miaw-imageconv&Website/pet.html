@@ -17,10 +17,7 @@
 		$(document).ready(function() {
 			var urlParams = new URLSearchParams(window.location.search);
 			var src = urlParams.get('img');
-			var link = "media/" + id + "/" + id;
-			for (i = 0; i < 20; i++) {
-				$("body").append("<img src='" + src + "'></img>");
-			}
+			$("body").append("<img src='" + src + "'></img>");
 		});
 	</script>
 	<ol></ol>
