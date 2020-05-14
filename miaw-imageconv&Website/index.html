@@ -8,7 +8,6 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <script src="http://code.jquery.com/jquery.min.js"></script>
 </head>
 <style>
   .box {
@@ -33,28 +32,30 @@
   </div>
     
   <script>
-    $(document).ready(function() {
-      $.getJSON('https://ixaq6f2dnf.execute-api.us-east-2.amazonaws.com/prod/pets', function(data) {
-        var info = JSON.parse('[{"IMGORIGINAL": "media/felipe.jpg", "SK": "img_1", "IMGNORMAL": "normal/felipe.jpg", "PK": "mascota_2", "IMGTHUMB": "thumbnails/felipe.jpg"}, {"IMGORIGINAL": "media/felipe2.jpg", "SK": "img_2", "IMGNORMAL": "normal/felipe2.jpg", "PK": "mascota_2", "IMGTHUMB": "thumbnails/felipe2.jpg"}, {"IMGORIGINAL": "media/felipe3.jpg", "SK": "img_3", "IMGNORMAL": "normal/felipe3.jpg", "PK": "mascota_2", "IMGTHUMB": "thumbnails/felipe3.jpg"}, {"SK": "mascota_2", "PET_TYPE": "gato", "HEALTH": "enfermo", "PK": "mascota_2", "LOCATION": "Miraflores", "AGE": 1}, {"IMGORIGINAL": "media/doge.jpg", "SK": "img_1", "IMGNORMAL": "normal/doge.jpg", "PK": "mascota_1", "IMGTHUMB": "thumbnails/doge.jpg"}, {"IMGORIGINAL": "media/doge2.jpg", "SK": "img_2", "IMGNORMAL": "normal/doge2.jpg", "PK": "mascota_1", "IMGTHUMB": "thumbnails/doge2.jpg"}, {"IMGORIGINAL": "media/doge3.jpg", "SK": "img_3", "IMGNORMAL": "normal/doge3.jpg", "PK": "mascota_1", "IMGTHUMB": "thumbnails/doge3.jpg"}, {"SK": "mascota_1", "PET_TYPE": "perro", "HEALTH": "sano", "PK": "mascota_1", "LOCATION": "Sopocachi", "AGE": 2}]');
-        $("ol").append("sss");
-        $.each(info, function(i, item) {
-          var link = "pet.html?" + "img=" + info[i].IMGNORMAL;
+    $.ajax({
+      type: 'GET',
+      url: 'inserte api aqui',
+      dataType: 'json',
+      success: function(data) {
+        console.log('success', data);
+        $.each(data, function(i, item) {
+          var link = "pet.html?" + "img=" + data[i].IMGNORMAL;
           $("ol").append(
             "<div class='box'>" + 
               "<div class='card' style='width: 18rem;'>" + 
-              "<img class='image' src='" + info[i].IMGTHUMB + "' alt='Card image cap'>" + 
+              "<img class='image' src='" + data[i].IMGTHUMB + "' alt='Card image cap'>" + 
                 "<div class='card-body'>" + 
-                  "<h5 class='card-title'>" + info[i].PK + "</h5>" + 
-                  "<h5 class='card-title'>" + info[i].AGE + "</h5>" + 
-                  "<h5 class='card-title'>" + info[i].HEALTH + "</h5>" + 
-                  "<h5 class='card-title'>" + info[i].LOCATION + "</h5>" + 
+                  "<h5 class='card-title'>Nombre: " + data[i].PK + "</h5>" + 
+                  "<h5 class='card-title'>Edad: " + data[i].AGE + "</h5>" + 
+                  "<h5 class='card-title'>Salud: " + data[i].HEALTH + "</h5>" + 
+                  "<h5 class='card-title'>Ubicación: " + data[i].LOCATION + "</h5>" + 
                   "<a href='" + link + "' class='btn btn-primary'>Ir a Mascota</a>" + 
                 "</div>" + 
               "</div>" + 
             "</div>"
           );
         });
-      });
+      }
     });
   </script>
 
