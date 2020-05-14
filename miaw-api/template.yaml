@@ -73,6 +73,24 @@ Resources:
           Properties:
             RestApiId: !Ref MyAPI
             Path: /pets
+            Method: POST
+            
+  Table:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: Table
+      Runtime: python3.6
+      CodeUri: ./build
+      Handler: lambda2.handler
+      Timeout: 30
+      MemorySize: 500
+      Role: !GetAtt MyLambdaRole.Arn
+      Events:
+        GetUsers:
+          Type: Api
+          Properties:
+            RestApiId: !Ref MyAPI
+            Path: /Table
             Method: GET
   
 Outputs: 
