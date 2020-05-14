@@ -35,7 +35,7 @@
   <script>
     $(document).ready(function() {
       $.getJSON('https://ixaq6f2dnf.execute-api.us-east-2.amazonaws.com/prod/pets', function(data) {
-        var info = JSON.parse(data);
+        var info = JSON.parse('[{"IMGORIGINAL": "media/felipe.jpg", "SK": "img_1", "IMGNORMAL": "normal/felipe.jpg", "PK": "mascota_2", "IMGTHUMB": "thumbnails/felipe.jpg"}, {"IMGORIGINAL": "media/felipe2.jpg", "SK": "img_2", "IMGNORMAL": "normal/felipe2.jpg", "PK": "mascota_2", "IMGTHUMB": "thumbnails/felipe2.jpg"}, {"IMGORIGINAL": "media/felipe3.jpg", "SK": "img_3", "IMGNORMAL": "normal/felipe3.jpg", "PK": "mascota_2", "IMGTHUMB": "thumbnails/felipe3.jpg"}, {"SK": "mascota_2", "PET_TYPE": "gato", "HEALTH": "enfermo", "PK": "mascota_2", "LOCATION": "Miraflores", "AGE": 1}, {"IMGORIGINAL": "media/doge.jpg", "SK": "img_1", "IMGNORMAL": "normal/doge.jpg", "PK": "mascota_1", "IMGTHUMB": "thumbnails/doge.jpg"}, {"IMGORIGINAL": "media/doge2.jpg", "SK": "img_2", "IMGNORMAL": "normal/doge2.jpg", "PK": "mascota_1", "IMGTHUMB": "thumbnails/doge2.jpg"}, {"IMGORIGINAL": "media/doge3.jpg", "SK": "img_3", "IMGNORMAL": "normal/doge3.jpg", "PK": "mascota_1", "IMGTHUMB": "thumbnails/doge3.jpg"}, {"SK": "mascota_1", "PET_TYPE": "perro", "HEALTH": "sano", "PK": "mascota_1", "LOCATION": "Sopocachi", "AGE": 2}]');
         $("ol").append("sss");
         $.each(info, function(i, item) {
           var link = "pet.html?" + "img=" + info[i].IMGNORMAL;
