@@ -11,7 +11,9 @@ Resources:
   MyLambdaRole:
     Type: AWS::IAM::Role
     Properties:
-      RoleName: rpp-ip-cluster-lambda-role
+      RoleName: lambdarol-common
+      ManagedPolicyArns: 
+        - 'arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess'
       AssumeRolePolicyDocument:
         Version: '2012-10-17'
         Statement:
@@ -33,11 +35,21 @@ Resources:
             - logs:CreateLogStream
             - logs:PutLogEvents
             Resource: arn:aws:logs:*:*:*
+          - Effect: Allow
+            Action:
+            - dynamodb:BatchGetItem
+            - dynamodb:GetItem
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:BatchWriteItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            Resource: arn:aws:dynamodb:*:*:table/pets
   
   MyAPI:
     Type: AWS::Serverless::Api
     Properties:
-      Name: my-api-gateway
+      Name: my-api-Mascotws
       StageName: prod
       DefinitionBody:
         Fn::Transform:
@@ -45,10 +57,10 @@ Resources:
           Parameters:
             Location: swagger.yaml
   
-  MyLambda1:
+  GetData:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: my-lambda-1
+      FunctionName: GetData
       Runtime: python3.6
       CodeUri: ./build
       Handler: lambda1.handler
@@ -60,10 +72,27 @@ Resources:
           Type: Api
           Properties:
             RestApiId: !Ref MyAPI
-            Path: /users
+            Path: /pets
+            Method: POST
+            
+  Table:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: Table
+      Runtime: python3.6
+      CodeUri: ./build
+      Handler: lambda2.handler
+      Timeout: 30
+      MemorySize: 500
+      Role: !GetAtt MyLambdaRole.Arn
+      Events:
+        GetUsers:
+          Type: Api
+          Properties:
+            RestApiId: !Ref MyAPI
+            Path: /Table
             Method: GET
   
-
 Outputs: 
   RoleARN:
     Value: !GetAtt MyLambdaRole.Arn 
