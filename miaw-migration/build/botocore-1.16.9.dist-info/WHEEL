@@ -1,0 +1,10 @@
+Wheel-Version: 1.0
+<<<<<<< HEAD
+Generator: bdist_wheel (0.34.2)
+=======
+Generator: bdist_wheel (0.24.0)
+>>>>>>> miaw-vivian
+Root-Is-Purelib: true
+Tag: py2-none-any
+Tag: py3-none-any
+
