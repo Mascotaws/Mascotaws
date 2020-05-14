@@ -71,8 +71,8 @@ aws lambda update-function-code --function-name convert-image-lambda --zip-file 
 fi
 
 if [[ $r -eq 1 ]]; then
-aws s3 cp index.html s3://convert-image544934777/index.html
-aws s3 cp pet.html s3://convert-image544934777/pet.html
+aws s3 cp index.html s3://convert-image544934777-new/index.html
+aws s3 cp pet.html s3://convert-image544934777-new/pet.html
 
 
 fi
