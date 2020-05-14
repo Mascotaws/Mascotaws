@@ -41,7 +41,7 @@ esac
 
 if [[ $i -eq 1 ]]; then
   mkdir -p build
-  cp -r src/* build/
+  #cp -r src/* build/
 fi
 
 if [[ $b -eq 1 ]]; then
